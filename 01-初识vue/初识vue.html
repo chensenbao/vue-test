@@ -4,10 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <title>初识vue</title>
+    <!-- 开发的vue依赖 -->
+    <script type="text/javascript" src="../js/vue-dev.js"></script>
+    <!-- 生产的vue依赖 -->
+    <!-- <script type="text/javascript" src="../js/vue-prod.js"/> -->
 </head>
 
 <body>
-    <script type="text/javascript" src="../js/vue-dev.js"></script>
+<!--准备好一个容器-->
+<div id="root">
+    <h1>hello world</h1>
+</div>
+
+<script type="text/javascript">
+    Vue.config.productionTip = false;
+    new Vue()
+</script>
 </body>
 
 </html>
