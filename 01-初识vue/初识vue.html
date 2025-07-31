@@ -11,14 +11,36 @@
 </head>
 
 <body>
+<!--
+Vue工作需要容器和实例,容器和实例的关系是一对一
+容器的内容称为:Vue模板
+Vue实例负责管理Vue模板
+注意区分:js表达式和js代码(语句)
+    1.表达式:一个表达式会生成一个值,可以放在任何一个需要值的地方
+        例:a   a+b     Date.now()
+    2.js代码:js代码会执行，但是不能放在任何一个需要值的地方
+        例:if(a>b){}   for(var i=0;i<10;i++){}
+-->
+
 <!--准备好一个容器-->
 <div id="root">
-    <h1>hello world</h1>
+    <!--    <h1>hello world</h1>-->
+    <!--    {{name}}是插值语法-->
+    <h1>hello {{name}}，age：{{age}}</h1>
 </div>
 
 <script type="text/javascript">
     Vue.config.productionTip = false;
-    new Vue()
+    // 创建一个vue实例
+    new Vue({
+        // el用于指定实力为哪个容器服务，值通常为css选择器字符串
+        el: '#root',
+        data: {
+            // data用于存储数据，数据供el中的内容使用
+            name: 'xiaoming',
+            age: 18
+        }
+    });
 </script>
 </body>
 
