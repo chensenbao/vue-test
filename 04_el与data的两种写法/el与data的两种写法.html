@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-model="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>el与data的两种写法</title>
+    <script type="text/javascript" src="../js/vue-dev.js"></script>
+</head>
+
+<body>
+<!--
+el与data的两种写法
+el
+    1直接在new Vue()时候配置el属性
+    2先创建Vue实例,在通过$mount()方法指定el属性
+data
+    1对象式
+    2函数式(推荐);不建议使用箭头函数,因为箭头函数的this指向外部作用域的this(window)
+-->
+<div id="root">
+    你好,{{name}}
+
+</div>
+
+<script type="text/javascript">
+    Vue.config.productionTip = false;
+    /**
+     el的第一种写法
+     new Vue({
+     el: '#root',
+     data: {
+     name: '张三'
+     }
+     });
+     */
+// el的第二种写法
+//     let v = new Vue({
+//         // el: '#root',
+//         data: {
+//             name: '张三'
+//         }
+//     });
+    // console.log(v);
+    // setTimeout(function () {
+    // v.$mount('#root');
+    // }, 1000)
+
+    //data的两种写法
+    new Vue({
+        el: '#root',
+        // 对象式写法
+        // data: {
+        //     name: '张三'
+        // }
+        // 函数式写法
+        // data: ()=> {
+        //     // 调用者是windows对象;因为箭头函数的this指向外部作用域的this,故Vue的data不建议使用箭头函数
+        //     console.log("调用者:",this);
+        //     return {
+        //         name: '张三'
+        //     }
+        // },
+        data() {
+            // 调用者是Vue实例对象
+            console.log("调用者:",this);
+            return {
+                name: '张三'
+            }
+        }
+    });
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MVVM模型</title>
+</head>
+<script type="text/javascript" src="../js/vue-dev.js"></script>
+<body>
+<!--
+MVVM模型
+M 模型(Model):数据模型(对应data种的数据)
+V 视图(View):模板代码
+VM 视图模型(ViewModel):Vue实例对象
+-->
+<!--视图(View)-->
+<div id="root">
+    <h1>学校名称:{{name}}</h1>
+    <h1>学校地址:{{address}}</h1>
+
+</div>
+<script type="text/javascript">
+<!--    视图模型(ViewModel)-->
+    new Vue({
+        el: '#root',
+        // 模型(Model)
+        data() {
+            return {
+                name: '中心小学',
+                address: '西藏'
+            }
+        }
+    })
+</script>
+</body>
+</html>
