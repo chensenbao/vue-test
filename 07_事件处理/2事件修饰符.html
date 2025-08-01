@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:el="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>事件修饰符</title>
+    <script src="../js/vue-dev.js"></script>
+    <style>
+        .demo1 {
+            background-color: red;
+            height: 50px;
+
+            * {
+                margin: 10px;
+            }
+        }
+
+        .box1 {
+            padding: 5px;
+            background-color: yellow;
+        }
+
+        .box2 {
+            padding: 5px;
+            background-color: blue;
+        }
+
+        .list {
+            width: 100px;
+            height: 100px;
+            background-color: beige;
+            overflow: auto;
+        }
+
+        li {
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+<!--
+Vue中的事件修饰符(可以连续调用)
+    prevent:阻止默认事件(常用);
+    stop:阻止事件冒泡(常用);
+    once:事件只触发一次(常用);
+    capture:使用事件的捕获模式
+    self:只有event.target是当前操作的元素时才触发事件
+    passive:事件的默认行为立即执行,无需等待事件回调函数执行完毕
+-->
+
+<div id="root">
+    <h5>你好，{{name}}</h5>
+    <!--    阻止默认事件-->
+    <a :href="url" @click.prevent="showInfo">跳转到百度</a>
+    <!--    阻止事件冒泡-->
+    <div class="demo1" @click="showInfo">
+        <button @click.stop="showInfo">点击提示信息</button>
+    </div>
+    <!--    事件只触发一次-->
+    <button @click.once="showInfo">点击提示信息只触发一次</button>
+    <!--    只有event.target是当前操作的元素时才触发事件-->
+    <div class="box1" @click.capture="showMsg('box1的点击事件')">
+        div1
+        <div class="box2" @click="showMsg('box2的点击事件')">
+            div2
+        </div>
+    </div>
+    <!--    只有event.target是当前操作的元素时才触发事件-->
+    <div class="demo1" @click.self="showInfo">
+        <button @click="showInfo">点击提示信息</button>
+    </div>
+    <!--    事件的默认行为立即执行,无需等待事件回调函数执行完毕-->
+    <ul class="list" @scroll.passive="demo">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+
+</div>
+<script>
+    Vue.config.productionTip = false;
+
+    function demo() {
+        // 模拟耗时操作
+        for (let i = 0; i < 100000; i++){
+            console.log("a");
+        }
+        console.log('滚动结束')
+    }
+
+    function showInfo(e) {
+        alert('阻止事件跳转');
+    }
+
+    function showMsg(msg) {
+        alert('事件信息：' + msg);
+    }
+
+    new Vue({
+        el: '#root',
+        data: {
+            name: '张三',
+            url: 'https://www.baidu.com'
+        },
+        methods: {
+            showInfo,
+            showMsg,
+            demo,
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>事件的基本使用</title>
+</head>
+<script type="text/javascript" src="../js/vue-dev.js"></script>
+<body>
+<!--
+事件的基本使用
+    使用v-on:xxx或简写为@xxx (xxx是事件名);
+    事件的回调要定义在Vue的methods中,最终会出现在Vue实例上;
+    事件回调函数中的this指向Vue实例对象(不能使用箭头函数);
+    methods中配置的函数,都是被Vue管理的函数,this的指向是vm或组件实例对象;
+    @click="show"和@click="show($event)"效果相同,但后者可以传参;
+-->
+<div id="root">
+    <h2>欢迎你，{{name}}</h2>
+    <button v-on:click="showInfo1">点击提示信息</button>
+    <br>
+    <button @click="showInfo2(985,$event)">点击提示信息的简写形式</button>
+    <br>
+
+</div>
+
+<script type="text/javascript">
+    Vue.config.productionTip = false;
+
+    // event参数在无参时可忽略,是点击事件的默认形参
+    function showInfo1(event) {
+        console.log("点击的对象是:", event)
+        alert("弹出提示信息")
+    }
+
+    function showInfo2(num, event, b) {
+        console.log("函数的形参:", num, event, b)
+        alert("弹出简写的提示信息" + num)
+    }
+
+    new Vue({
+        el: '#root',
+        data() {
+            return {
+                name: '张三'
+            }
+        },
+        methods: {
+            showInfo1,
+            showInfo2
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:el="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>键盘事件</title>
+    <script src="../js/vue-dev.js"></script>
+</head>
+<body>
+<!--
+Vue中的键盘事件
+    1.keyup:按键抬起时触发
+    2.keydown:按键按下时触发
+Vue有九个常见按键别名。例：回车（enter）、删除（delete）等
+
+-->
+
+<div id="root">
+    <h5>你好，{{name}}</h5>
+    <input type="text" placeholder="按下回车提示输入" @keyup.enter="showInfo">
+
+</div>
+<script>
+    Vue.config.productionTip = false;
+
+    function showInfo(e) {
+        // alert('键盘事件:'+e.target.value);
+        console.log('键盘事件：',e.target.value);
+    }
+    new Vue({
+        el: '#root',
+        data: {
+            name: '张三',
+        },
+        methods: {
+            showInfo,
+        }
+    });
+</script>
+</body>
+</html>
